@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://c843hkokp8ldo"]
+
+[ext_resource type="Script" path="res://TableArrangement.gd" id="1_818wo"]
+[ext_resource type="PackedScene" uid="uid://dlc81w0l7xycc" path="res://Table.tscn" id="2_0phrm"]
+[ext_resource type="PackedScene" uid="uid://b5sc50vy25382" path="res://Seat.tscn" id="3_okorl"]
+
+[node name="TableArrangement" type="Node2D"]
+script = ExtResource("1_818wo")
+table_scene = ExtResource("2_0phrm")
+seat_scene = ExtResource("3_okorl")

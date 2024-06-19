@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlc81w0l7xycc"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_je1gn"]
+size = Vector2(400, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rk3p3"]
+size = Vector2(400, 100)
+
+[node name="Table" type="Area2D"]
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_je1gn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rk3p3")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

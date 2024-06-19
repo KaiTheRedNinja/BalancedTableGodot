@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5sc50vy25382"]
+
+[ext_resource type="Script" path="res://Seat.gd" id="1_rk06m"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pk7md"]
+size = Vector2(50, 50)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ioe6p"]
+radius = 25.02
+
+[node name="Seat" type="Area2D"]
+script = ExtResource("1_rk06m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_pk7md")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ioe6p")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
