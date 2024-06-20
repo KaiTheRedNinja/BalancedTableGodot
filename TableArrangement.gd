@@ -1,5 +1,7 @@
 extends Node2D
 
+const cellWidth = 100
+
 @export var table_scene: PackedScene
 @export var seat_scene: PackedScene
 var score
@@ -13,23 +15,28 @@ func _ready():
 
 func setupTable():
 	var screen_size = get_viewport_rect().size
-	var table = table_scene.instantiate()
-	var tablePos = (screen_size) /2
-	table.position = tablePos
-	add_child(table)
-	
-	const cellWidth = 100
-	for index in range(8):
-		# this is relative to the position of the table
-		var height = (-1 if index < 4 else 1)*cellWidth
-		var width = (-1.5*cellWidth) + index%4 * cellWidth
-		var newSeat = seat_scene.instantiate()
-		newSeat.position = tablePos + Vector2(width, height)
-		newSeat.clicked.connect(
-			Callable(_on_seat_click)
-				.bind(index))
-		add_child(newSeat)
-		seats.append(newSeat)
+	var centerPos = (screen_size) /2
+	for tableIndex in range(2):
+		var table = table_scene.instantiate()
+		# To break down the magic value
+		# 2 -> Position of the first table from the center
+		# 4 -> Number of cells lower the second table is from the first
+		# -4*tableIndex -> 0 if table index is 0, -4 if table index is 1
+		var tablePos = centerPos - Vector2(0, (2-4*tableIndex) * cellWidth)
+		table.position = tablePos
+		add_child(table)
+		
+		for seatIndex in range(8):
+			# this is relative to the position of the table
+			var height = (-1 if seatIndex < 4 else 1)*cellWidth
+			var width = (-1.5*cellWidth) + seatIndex%4 * cellWidth
+			var newSeat = seat_scene.instantiate()
+			newSeat.position = tablePos + Vector2(width, height)
+			newSeat.clicked.connect(
+				Callable(_on_seat_click)
+					.bind(seatIndex + tableIndex*8))
+			add_child(newSeat)
+			seats.append(newSeat)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
