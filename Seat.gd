@@ -1,10 +1,17 @@
 extends Area2D
 
-@export var isSelected = false
+signal clicked(selected: bool)
+
+var isSelected = false
+
 var isHovering = false
 
 var screen_size
 var self_size = Vector2(400, 100)
+
+func changeSelectionStatus(selected: bool):
+	isSelected = selected
+	scale = get_selection_based_scale()
 
 func get_selection_based_scale():
 	var selectionMultiplier
@@ -33,9 +40,9 @@ func _mouse_exit():
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
-		isSelected = !isSelected
 		isHovering = false
 		scale = get_selection_based_scale()
+		clicked.emit(isSelected)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
