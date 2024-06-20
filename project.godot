@@ -14,3 +14,7 @@ config/name="BalancedTable"
 run/main_scene="res://TableArrangement.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"

@@ -1,7 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dlc81w0l7xycc"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_je1gn"]
-size = Vector2(400, 100)
+[ext_resource type="Texture2D" uid="uid://ceqiopn83w51g" path="res://Assets/Table.png" id="1_eb84d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rk3p3"]
 size = Vector2(400, 100)
@@ -10,7 +9,8 @@ size = Vector2(400, 100)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_je1gn")
+scale = Vector2(0.88, 0.88)
+texture = ExtResource("1_eb84d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rk3p3")
