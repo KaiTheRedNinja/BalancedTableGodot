@@ -1,30 +1,20 @@
+## Seats are the things that the user actually interacts with. They do not change
+## size, but they signal whenever they are clicked, and hover on interact.
+##
+## This is because players can be swapped into empty seats, so empty seats need
+## to be interactable.
+
 extends Area2D
 
-signal clicked(selected: bool)
-
-var isSelected = false
+signal clicked()
 
 var isHovering = false
 
 var screen_size
 var self_size = Vector2(400, 100)
 
-func changeSelectionStatus(selected: bool):
-	isSelected = selected
-	scale = get_selection_based_scale()
-
 func get_selection_based_scale():
-	var selectionMultiplier
-	var hoveringMultiplier
-	
-	if isSelected:
-		selectionMultiplier = 1.3
-		hoveringMultiplier = (0.95 if isHovering else 1)
-	else:
-		selectionMultiplier = 1
-		hoveringMultiplier = (1.1 if isHovering else 1)
-	
-	return Vector2.ONE * selectionMultiplier * hoveringMultiplier
+	return Vector2.ONE * (1.1 if isHovering else 1)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,7 +32,7 @@ func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		isHovering = false
 		scale = get_selection_based_scale()
-		clicked.emit(isSelected)
+		clicked.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
